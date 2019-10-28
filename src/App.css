@@ -1,0 +1,52 @@
+*{
+  margin: 0;
+}
+.App {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.mainbody {
+  padding-top:75px;
+}
+
+.messageFormat {
+  height: auto;
+  margin: auto;
+  text-align: justify;
+  max-width: 900px;
+  border-bottom: 1px solid lightblue;
+  border-left: 1px solid lightblue;
+
+}
+
+.messageFormat p {
+  margin: 5px;
+}
+
+.formFormat {
+  height: auto;
+  margin: auto;
+  text-align: justify;
+  max-width: 900px;
+  border-bottom: 1px solid lightblue;
+  border-left: 1px solid lightblue;
+}
+
+.formFormat h3, button {
+  margin: 5px;
+}
+
+.messingInputFormat {
+  height: 150px;
+  width: 100%;
+}
+
+h1 {
+  padding-bottom: 30px;
+}
+
+h2, h3 ,h4 {
+  padding-bottom: 5px;
+  margin-left: 2px;
+}
