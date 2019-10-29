@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 
-class Sent extends Component {
+class Inbox extends Component {
 
   constructor() {
     super()
     this.state = {
-      sentMessages: [],
+      receivedMessages: [],
       isLoaded: false
     }
   }
 
   async componentDidMount() {
-    await fetch("http://localhost:8080/api/msg/sent")
+    await fetch("http://localhost:8080/api/msg/received")
       .then(response => response.json())
       .then(json => this.setState({
-        sentMessages: json, isLoaded: true
+        receivedMessages: json, isLoaded: true
       }));
   }
 
@@ -22,30 +22,27 @@ class Sent extends Component {
     if (!this.state.isLoaded) {
       return (
         <div className="mainbody">
-          <h2>SENT</h2>
+          <h2>Inbox</h2>
           Loading...
-          <button onClick={ () => this.componentDidMount() } >Refresh</button>
         </div>
-      )
+      );
     } else {
       return (
         <div className="mainbody">
-          <h2>SENT</h2>
-          {this.state.sentMessages.map(message =>
+          <h2>INBOX</h2>
+          {this.state.receivedMessages.map(message =>
             <div className="messageFormat">
-              <h4>{ message.id       }</h4>
-              <h4>Sent To:</h4>
-              <p> { message.usr_to   }</p>
+              <h4>From:</h4>
+              <p>{ message.usr_from     }</p>
               <h4>Message:</h4>
               <p> { message.message  }</p>
-              <br></br>
+              <button>Reply</button>
             </div>
           )}
-          <button onClick={ () => this.componentDidMount() } >Refresh</button>
         </div>
       );
     }
   }
 }
 
-export default Sent
+export default Inbox

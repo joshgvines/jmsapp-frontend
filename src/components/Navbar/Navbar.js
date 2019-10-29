@@ -15,7 +15,8 @@ const Navbar = props => (
 
       <div className="navbar_nav-items">
         <ul>
-          <li><Link to='/sent'>SENT</Link></li>
+          <li><Link to='/Inbox'>INBOX</Link></li>
+          <li><Link to='/Sent'>SENT</Link></li>
           <li><Link to='/Send'>SEND</Link></li>
         </ul>
       </div>

@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import Sent from './components/Sent';
 import Send from './components/Send';
 import Home from './components/Home';
+import Inbox from './components/Inbox'
 
 class App extends Component {
 
@@ -19,9 +20,10 @@ class App extends Component {
 
           <Navbar />
 
-          <Route exact path="/" component={ Home } />
-          <Route path="/sent"   component={ Sent } />
-          <Route path="/send"   component={ Send } />
+          <Route exact path="/" component={ Home  } />
+          <Route path="/sent"   component={ Sent  } />
+          <Route path="/send"   component={ Send  } />
+          <Route path="/inbox"  component={ Inbox } />
 
         </div>
 
