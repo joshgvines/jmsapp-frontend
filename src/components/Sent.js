@@ -11,7 +11,7 @@ class Sent extends Component {
   }
 
   async componentDidMount() {
-    fetch("http://localhost:8080/api/msg/sent")
+    await fetch("http://localhost:8080/api/msg/sent")
       .then(response => response.json())
       .then(json => this.setState({
         sentMessages: json, isLoaded: true
