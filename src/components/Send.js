@@ -7,27 +7,33 @@ class Send extends Component {
     super()
     this.state = {
       usr_to: '',
-      usr_from: '',
+      usr_from: 'username',
       message: '',
+      emptyMessage: ''
     }
   }
 
   changeHandler = e => {
+    e.preventDefault();
     this.setState({ [e.target.name]: e.target.value })
   }
 
   submitHandler = e => {
-
-    e.preventDefault()
+    e.preventDefault();
     console.log(this.state);
+    if(this.state.message.trim() != '' && this.state.usr_to.trim() != '') {
+      this.setState({emptyMessage: ''});
+      axios.post("http://localhost:8080/api/msg/send", this.state)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    } else {
+      this.setState({emptyMessage: "To: and Message: cannot be empty!"});
+    }
 
-    axios.post("http://localhost:8080/api/msg/send", this.state)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
   }
 
   render() {
@@ -36,16 +42,13 @@ class Send extends Component {
       <div className="mainbody">
         <h2>SEND</h2>
         <form className="formFormat" onSubmit={ this.submitHandler }>
+          <p className="errorMessage">{this.state.emptyMessage}</p>
           <h3>To:</h3>
 
           <div>
             <input type="text" name="usr_to"
+            onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
             value={ usr_to } onChange={ this.changeHandler } />
-          </div>
-
-          <div>
-            <input type="text" name="usr_from"
-            value={ usr_from } onChange={ this.changeHandler } />
           </div>
 
           <h3>Your Message:</h3>

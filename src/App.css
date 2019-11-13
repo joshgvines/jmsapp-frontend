@@ -33,6 +33,11 @@
   border-left: 1px solid lightblue;
 }
 
+.errorMessage {
+  color: red;
+  font-weight: bold;
+}
+
 .formFormat h3, button {
   margin: 5px;
 }

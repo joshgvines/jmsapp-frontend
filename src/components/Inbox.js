@@ -39,6 +39,7 @@ class Inbox extends Component {
               <button>Reply</button>
             </div>
           )}
+          <button onClick={ () => this.componentDidMount() } >Refresh</button>
         </div>
       );
     }
