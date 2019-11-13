@@ -1,39 +1,35 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 class Inbox extends Component {
 
   constructor() {
     super()
     this.state = {
+      myUsername: 'username',
       receivedMessages: [],
-      isLoaded: false
+      isLoaded: true
     }
   }
 
-  async componentDidMount() {
-    await fetch("http://localhost:8080/api/msg/received")
-      .then(response => response.json())
-      .then(json => this.setState({
-        receivedMessages: json, isLoaded: true
-      }));
+  componentDidMount() {
+    axios.get("http://localhost:8080/api/msg/received", {
+      params: {
+        username: "username"
+      }
+    }).then(response => {
+      this.setState({ receivedMessages: response.data });
+    })
   }
 
   render() {
-    if (!this.state.isLoaded) {
-      return (
-        <div className="mainbody">
-          <h2>Inbox</h2>
-          Loading...
-        </div>
-      );
-    } else {
       return (
         <div className="mainbody">
           <h2>INBOX</h2>
           {this.state.receivedMessages.map(message =>
             <div className="messageFormat">
               <h4>From:</h4>
-              <p>{ message.usr_from     }</p>
+              <p>{ message.userFrom  }</p>
               <h4>Message:</h4>
               <p> { message.message  }</p>
               <button>Reply</button>
@@ -43,7 +39,6 @@ class Inbox extends Component {
         </div>
       );
     }
-  }
 }
 
 export default Inbox

@@ -6,8 +6,8 @@ class Send extends Component {
   constructor() {
     super()
     this.state = {
-      usr_to: '',
-      usr_from: 'username',
+      userTo: '',
+      userFrom: 'username',
       message: '',
       emptyMessage: ''
     }
@@ -21,7 +21,8 @@ class Send extends Component {
   submitHandler = e => {
     e.preventDefault();
     console.log(this.state);
-    if(this.state.message.trim() != '' && this.state.usr_to.trim() != '') {
+    if(this.state.message.trim() != '' && this.state.userTo.trim() != '') {
+
       this.setState({emptyMessage: ''});
       axios.post("http://localhost:8080/api/msg/send", this.state)
         .then(response => {
@@ -30,6 +31,7 @@ class Send extends Component {
         .catch(error => {
           console.log(error)
         })
+
     } else {
       this.setState({emptyMessage: "To: and Message: cannot be empty!"});
     }
@@ -46,7 +48,7 @@ class Send extends Component {
           <h3>To:</h3>
 
           <div>
-            <input type="text" name="usr_to"
+            <input type="text" name="userTo"
             onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
             value={ usr_to } onChange={ this.changeHandler } />
           </div>

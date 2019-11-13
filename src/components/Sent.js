@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 class Sent extends Component {
 
@@ -11,23 +12,16 @@ class Sent extends Component {
   }
 
   async componentDidMount() {
-    await fetch("http://localhost:8080/api/msg/sent")
-      .then(response => response.json())
-      .then(json => this.setState({
-        sentMessages: json, isLoaded: true
-      }));
+    axios.get("http://localhost:8080/api/msg/sent", {
+      params: {
+        username: "username"
+      }
+    }).then(response => {
+        this.setState({ sentMessages: response.data });
+    })
   }
 
   render() {
-    if (!this.state.isLoaded) {
-      return (
-        <div className="mainbody">
-          <h2>SENT</h2>
-          Loading...
-          <button onClick={ () => this.componentDidMount() } >Refresh</button>
-        </div>
-      )
-    } else {
       return (
         <div className="mainbody">
           <h2>SENT</h2>
@@ -35,7 +29,7 @@ class Sent extends Component {
             <div className="messageFormat">
               <h4>{ message.id       }</h4>
               <h4>Sent To:</h4>
-              <p> { message.usr_to   }</p>
+              <p> { message.userTo   }</p>
               <h4>Message:</h4>
               <p> { message.message  }</p>
               <br></br>
@@ -45,7 +39,7 @@ class Sent extends Component {
         </div>
       );
     }
-  }
+
 }
 
 export default Sent
